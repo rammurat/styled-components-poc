@@ -48,10 +48,23 @@ const media = Object.keys(sizes).reduce((acc, label) => {
     @media (max-width: ${sizes[label] / 16}em) {
         ${css(...args)}
     }`
+    console.log(acc)
     return acc
 }, {})
 
 const Content = styled.div`
+    height: 3em;
+    width: 3em;
+    background: papayawhip;
+    margin: 0 auto;
+    /* Now we have our methods on media and can use them instead of raw queries */
+    ${media.desktop`background: dodgerblue;`}
+    ${media.tablet`background: mediumseagreen;`}
+    ${media.phone`background: palevioletred;`}
+`;
+
+
+const Content2 = styled.div`
     height: 3em;
     width: 3em;
     background: papayawhip;
@@ -80,10 +93,12 @@ const Register = () => {
                 </ThemeProvider>
 
                 <h1>Duplicate use case</h1>
-                <Para className="duplicate">Same class name</Para>
+                <Para className="red">Same class name</Para>
 
                 <h1>Media Templates</h1>
                 <Content />
+
+                <Content2 />
 
                 <h1>Using JS object instead of string</h1>
                 <Box />
